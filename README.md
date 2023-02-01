@@ -1,6 +1,6 @@
 # Python Youtube Video Downloader
 
-Before running the program please install the following requirements
+Before running the program please install the required dependencies
 by running the following command inside the root folder.
 
 ```
