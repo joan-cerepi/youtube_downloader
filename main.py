@@ -54,12 +54,14 @@ def download_playlist(url):
     playlist = Playlist(url)
 
     for video in playlist.videos:
+        print(f"' {video.title} ' started downloading.")
         video.streams.get_highest_resolution().download('Playlists/')
         print(f"' {video.title} ' finished downloading.")
+    return playlist.title
 
 
 user_choice = option_menu()
-url = input('Enter your video url: ')
+url = input('Enter your url: ')
 
 
 def main():
