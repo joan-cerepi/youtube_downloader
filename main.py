@@ -3,7 +3,7 @@ from videos import Video
 
 
 def main():
-    '''Make sure '''
+    '''Main body of the program.'''
     # Print out a title banner at the top of the program output.
     banner()
     user_url = input('Enter your url: ')
