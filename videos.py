@@ -1,5 +1,5 @@
 from pytube import YouTube, Playlist
-from pytube.exceptions import VideoUnavailable, RegexMatchError
+from pytube.exceptions import *
 import sys
 
 
@@ -20,8 +20,12 @@ class Video:
         '''Download Video into the given path.'''
         try:
             YouTube(self.url)
-        except (VideoUnavailable, RegexMatchError):
-            print('Video not found.')
+        except VideoUnavailable:
+            print('Video is not available.')
+            sys.exit(0)
+        except RegexMatchError:
+            print('The link does not seem to be quite right.')
+            print('Correct the link and run the code again.')
             sys.exit(0)
         YouTube(self.url).streams.get_highest_resolution().download(self.path)
         
