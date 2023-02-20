@@ -1,5 +1,6 @@
 from pytube import YouTube, Playlist
 from pytube.exceptions import *
+import progressbar
 import sys
 
 
@@ -16,10 +17,10 @@ class Video:
         return self.url
 
 
-    def download(self):
+    def download_video(self):
         '''Download Video into the provided path.'''
         try:
-            YouTube(self.url)
+            yt_video = YouTube(self.url)
         except VideoUnavailable:
             print('Video is not available.')
             sys.exit(0)
@@ -36,7 +37,11 @@ class Video:
         playlist = Playlist(self.url)
         try:
             for video in playlist.videos:
-                video.streams.get_highest_resolution().download(self.path)
+                try:
+                    video.streams.get_highest_resolution().download(self.path)
+                except VideoUnavailable:
+                    print('Video is unavailable. Skipping...')
         except KeyError:
             print()
             print('Please check your link and try again.')
+            sys.exit(0)
